@@ -1,7 +1,8 @@
 //*******************************************
 // MAIN PROGRAM CONTROL
 //*******************************************
-function buildTree (clickEvent) {
+function buildTree () {
+console.log("buildingTree");
 //*******************************************
 // It accepts a single object as an argument. The object should have two key/value pairs.
 //
@@ -18,6 +19,9 @@ function buildTree (clickEvent) {
 
 //*******************************************
 // ... or click a button that is labeled "Grow your tree"  ... 
+//
+// FORMULA for PRINTING THE CHARS :: 2i + 1
+// FORMULA for SPACES :: treeHeight = (i+1)
 //*******************************************
 
 //*******************************************
@@ -36,9 +40,9 @@ function buildTree (clickEvent) {
 //*******************************************
 // define Event Listeners
 //*******************************************
-var enterKey = document.getElementsByClassName("tempForm");
-var converterButton = document.getElementById("converter");
-var clearButton = document.getElementById("clear");
+var enterHeight = document.getElementById("treeHeight");
+var enterChar = document.getElementById("treeChar");
+var growButton = document.getElementById("btnText");
 
 
 //*******************************************
@@ -47,20 +51,26 @@ var clearButton = document.getElementById("clear");
 // (as long as the cursor is in one of the input fields) ... 
 //*******************************************
 
+enterHeight.addEventListener("keyup", inputKeyUp);
+enterChar.addEventListener("keyup", inputKeyUp);
+
 function inputKeyUp(e) {
     e.which = e.which || e.keyCode;
+console.log("in function inputKeyUp");
     if (e.which === 13) {
-    	performConversion();
+    	buildTree();
         // mainLaunchEnter();
     } else {
     	return false;
     }
 }
 
-// enterKey.addEventListener("keyup", function() { // NOT TESTED ... BUT SHOULD WORK
-//     e.which = e.which || e.keyCode;
+// NOT WORKING ???
+// enterKey.addEventListener("keyup", function() { // from Justin
+//     e.which = e.which || e.keyCode;			   // NOT TESTED ... BUT SHOULD WORK
+// console.log("in <enterKey> eventHandler");
 //     if (e.which === 13) {
-//     	performConversion();
+//     	buildTree();
 //         // mainLaunchEnter();
 //     } else {
 //     	return false;
@@ -73,12 +83,10 @@ function inputKeyUp(e) {
 // and the tree should be shown in the console. 
 //*******************************************
 
-//  converterButton.addEventListener("click", function() {
-// 	performConversion();
-// });
+growButton.addEventListener("click", buildTree);
 
 
-clearButton.addEventListener("click", clearAll);
+// clearButton.addEventListener("click", clearAll);
 
 function clearAll (clickEvent) {
 	inputTemp = document.getElementById("temp").value = "";
