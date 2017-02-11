@@ -1,29 +1,45 @@
 //*******************************************
 // MAIN PROGRAM CONTROL
 //*******************************************
-function buildTree () {
-// console.log("buildingTree");
-//*******************************************
+function mainProgram () {
 
 	var treeProperties = ["treeHeight", "treeCharacter"];
-	var outputHeight = document.getElementById("treeHeight").value;
-	var outputChar = document.getElementById("treeChar").value;
 	// <treeHeight> and <treeCharacter> input by user
+	
+	treeProperties[0] = document.getElementById("treeHeight").value;
 
-	//*******************************************
-	// build the tree and 
-	// ... display in the console. 
-	//*******************************************
+	treeProperties[1] = document.getElementById("treeChar").value;
+
+//*******************************************
+// If either of the input fields does not have a value in it 
+// when the user presses the enter key, or presses the button, 
+// then display an alert stating that both fields must have a value.
+//*******************************************
+
+
+	buildTree(treeProperties);
+
+}
+
+
+
+//*******************************************
+// SUPPORTING FUNCTIONS
+//*******************************************
+
+function buildTree(properties) {
+	var outputHeight = properties[0];
+	var outputChar = properties[1];
 	var printSpaces; 
 	var printTreeChars;
 	var thisString = "";
-	for (var i=0; i<outputHeight; i++) {
-		// PRINT CHAR :: (2i) + 1
-		// PRINT SPACES :: outputHeight - (i+1)
-		printSpaces = outputHeight - (i+1); 
-		printTreeChars = (2*i) + 1;
 
-		// build this line
+	for (var i=0; i<outputHeight; i++) {
+
+		printSpaces = outputHeight - (i+1); // calculate #spaces to output
+		printTreeChars = (2*i) + 1;			// calculate #characters to output
+											// for this <i> line
+		// build this <i> line <string>
 		for (var j=0; j<printSpaces; j++) {
 			thisString += " ";
 		}
@@ -31,24 +47,17 @@ function buildTree () {
 			thisString += outputChar;
 		}
 
-		// output this line
+		// output this <i> line
 		console.log(thisString);
+
 		// clear the string for the next line
 		thisString = "";
 	}
-
-
-//*******************************************
-// If either of the input fields does not have a value in it 
-// when the user presses the enter key, or presses the button, 
-// then display an alert stating that both fields must have a value.
-//*******************************************
 }
 
 
-
 //*******************************************
-// define Event Listeners
+// EVENT LISTENERS
 //*******************************************
 var enterHeight = document.getElementById("treeHeight");
 var enterChar = document.getElementById("treeChar");
@@ -68,7 +77,7 @@ function inputKeyUp(e) {
     e.which = e.which || e.keyCode;
 // console.log("in function inputKeyUp");
     if (e.which === 13) {
-    	buildTree();
+    	mainProgram();
         // mainLaunchEnter();
     } else {
     	return false;
@@ -93,7 +102,7 @@ function inputKeyUp(e) {
 // and the tree should be shown in the console. 
 //*******************************************
 
-growButton.addEventListener("click", buildTree);
+growButton.addEventListener("click", mainProgram);
 
 
 // clearButton.addEventListener("click", clearAll);
