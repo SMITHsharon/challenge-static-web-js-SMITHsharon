@@ -3,22 +3,32 @@
 //*******************************************
 function mainProgram () {
 
-	var treeProperties = ["treeHeight", "treeCharacter"];
-	// <treeHeight> and <treeCharacter> input by user
-	
-	treeProperties[0] = document.getElementById("treeHeight").value;
+	var treeProperties = {
+		treeHeight: "",
+		treeCharacter: ""
+	}
 
-	treeProperties[1] = document.getElementById("treeChar").value;
+	var goodToGo = true;
 
+	goodToGo = readUserInput(treeProperties);
+// console.log("goodToGo :: ", goodToGo);
+
+	if (goodToGo) {
+		buildTree(treeProperties);
+	} else {
 //*******************************************
 // If either of the input fields does not have a value in it 
 // when the user presses the enter key, or presses the button, 
 // then display an alert stating that both fields must have a value.
 //*******************************************
+		alert("Must specify both height and character to build the tree! <duh>");
+	}
 
+	clearFields(); // reinitialize user interface
 
-	buildTree(treeProperties);
+// treeProperties[0] = document.getElementById("treeHeight").value;
 
+// treeProperties[1] = document.getElementById("treeChar").value;
 }
 
 
@@ -27,13 +37,32 @@ function mainProgram () {
 // SUPPORTING FUNCTIONS
 //*******************************************
 
+function readUserInput(properties) {
+
+	properties[0] = document.getElementById("treeHeight").value;
+	properties[1] = document.getElementById("treeChar").value;
+
+// console.log("readingUserInput / treeHeight :: ", properties[0]);
+// console.log("readingUserInput / treeChar :: ", properties[1]);
+
+
+	if ((properties[0] !== "") || (properties[1] !== "")) {
+		return true; // goodToGo
+	} else {
+		return false;
+	}
+}
+
+	
 function buildTree(properties) {
 	var outputHeight = properties[0];
 	var outputChar = properties[1];
 	var printSpaces; 
 	var printTreeChars;
 	var thisString = "";
-
+// console.log("in buildTree");
+// console.log("properties[0] :: ", properties[0]);
+// console.log("properties[1] :: ", properties[1]);
 	for (var i=0; i<outputHeight; i++) {
 
 		printSpaces = outputHeight - (i+1); // calculate #spaces to output
@@ -53,6 +82,10 @@ function buildTree(properties) {
 		// clear the string for the next line
 		thisString = "";
 	}
+}
+
+function clearFields() {
+
 }
 
 
