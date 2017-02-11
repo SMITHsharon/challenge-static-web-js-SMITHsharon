@@ -10,19 +10,31 @@ function buildTree () {
 	var outputChar = document.getElementById("treeChar").value;
 	// <treeHeight> and <treeCharacter> input by user
 
-// console.log("outputHeight :: ", outputHeight); // READING INPUT
-// console.log("outputChar :: ", outputChar);	   // READING INPUT
-
-
 	//*******************************************
 	// build the tree and 
 	// ... display in the console. 
 	//*******************************************
+	var printSpaces; 
+	var printTreeChars;
+	var thisString = "";
 	for (var i=0; i<outputHeight; i++) {
-// console.log("in print loop / i = ", i);
 		// PRINT CHAR :: (2i) + 1
 		// PRINT SPACES :: outputHeight - (i+1)
-		
+		printSpaces = outputHeight - (i+1); 
+		printTreeChars = (2*i) + 1;
+
+		// build this line
+		for (var j=0; j<printSpaces; j++) {
+			thisString += " ";
+		}
+		for (var k=0; k<printTreeChars; k++) {
+			thisString += outputChar;
+		}
+
+		// output this line
+		console.log(thisString);
+		// clear the string for the next line
+		thisString = "";
 	}
 
 
@@ -31,7 +43,7 @@ function buildTree () {
 // when the user presses the enter key, or presses the button, 
 // then display an alert stating that both fields must have a value.
 //*******************************************
-	}
+}
 
 
 
