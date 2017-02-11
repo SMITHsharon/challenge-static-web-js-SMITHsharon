@@ -2,31 +2,29 @@
 // MAIN PROGRAM CONTROL
 //*******************************************
 function buildTree () {
-console.log("buildingTree");
-//*******************************************
-// It accepts a single object as an argument. The object should have two key/value pairs.
-//
-// A key that specifies the height of the pine tree.
-// The value for the height of the tree should be from user input in a <input type="text"> field in the DOM.
-// A key that specifies which character to use to build the pine tree.
-// The character to use should be from user input in a <input type="text"> field in the DOM.
+// console.log("buildingTree");
 //*******************************************
 
-//*******************************************
-// Once the user enters in a number, and a character, the user can either then just 
-// press the enter key (as long as the cursor is in one of the input fields), ...
-//*******************************************
+	var treeProperties = ["treeHeight", "treeCharacter"];
+	var outputHeight = document.getElementById("treeHeight").value;
+	var outputChar = document.getElementById("treeChar").value;
+	// <treeHeight> and <treeCharacter> input by user
 
-//*******************************************
-// ... or click a button that is labeled "Grow your tree"  ... 
-//
-// FORMULA for PRINTING THE CHARS :: 2i + 1
-// FORMULA for SPACES :: treeHeight = (i+1)
-//*******************************************
+// console.log("outputHeight :: ", outputHeight); // READING INPUT
+// console.log("outputChar :: ", outputChar);	   // READING INPUT
 
-//*******************************************
-// ... and the tree should be shown in the console. 
-//*******************************************
+
+	//*******************************************
+	// build the tree and 
+	// ... display in the console. 
+	//*******************************************
+	for (var i=0; i<outputHeight; i++) {
+// console.log("in print loop / i = ", i);
+		// PRINT CHAR :: (2i) + 1
+		// PRINT SPACES :: outputHeight - (i+1)
+		
+	}
+
 
 //*******************************************
 // If either of the input fields does not have a value in it 
@@ -56,7 +54,7 @@ enterChar.addEventListener("keyup", inputKeyUp);
 
 function inputKeyUp(e) {
     e.which = e.which || e.keyCode;
-console.log("in function inputKeyUp");
+// console.log("in function inputKeyUp");
     if (e.which === 13) {
     	buildTree();
         // mainLaunchEnter();
