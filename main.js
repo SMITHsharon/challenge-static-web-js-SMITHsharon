@@ -8,27 +8,15 @@ function mainProgram () {
 		treeCharacter: ""
 	}
 
-	var goodToGo = true;
-
-	goodToGo = readUserInput(treeProperties);
-// console.log("goodToGo :: ", goodToGo);
-
-	if (goodToGo) {
+	var readyToBuild;
+	readyToBuild = readUserInput(treeProperties);
+	if (readyToBuild) {
 		buildTree(treeProperties);
 	} else {
-//*******************************************
-// If either of the input fields does not have a value in it 
-// when the user presses the enter key, or presses the button, 
-// then display an alert stating that both fields must have a value.
-//*******************************************
 		alert("Must specify both height and character to build the tree! <duh>");
 	}
 
-	clearFields(); // reinitialize user interface
-
-// treeProperties[0] = document.getElementById("treeHeight").value;
-
-// treeProperties[1] = document.getElementById("treeChar").value;
+	clearFields(treeProperties); // reinitialize user interface
 }
 
 
@@ -42,12 +30,8 @@ function readUserInput(properties) {
 	properties[0] = document.getElementById("treeHeight").value;
 	properties[1] = document.getElementById("treeChar").value;
 
-// console.log("readingUserInput / treeHeight :: ", properties[0]);
-// console.log("readingUserInput / treeChar :: ", properties[1]);
-
-
-	if ((properties[0] !== "") || (properties[1] !== "")) {
-		return true; // goodToGo
+	if ((properties[0] !== "") && (properties[1] !== "")) {
+		return true; // readyToBuild
 	} else {
 		return false;
 	}
@@ -60,9 +44,7 @@ function buildTree(properties) {
 	var printSpaces; 
 	var printTreeChars;
 	var thisString = "";
-// console.log("in buildTree");
-// console.log("properties[0] :: ", properties[0]);
-// console.log("properties[1] :: ", properties[1]);
+
 	for (var i=0; i<outputHeight; i++) {
 
 		printSpaces = outputHeight - (i+1); // calculate #spaces to output
@@ -84,7 +66,16 @@ function buildTree(properties) {
 	}
 }
 
-function clearFields() {
+
+// reiniatialize everything to start state
+function clearFields(properties) {
+
+	document.getElementById("treeHeight").value = "";
+	document.getElementById("treeChar").value = "";
+	document.getElementById("treeHeight").placeholder = "Height of Tree ::  ";
+	document.getElementById("treeChar").placeholder = "Character for Tree :: ";
+	properties[0] = "";
+	properties[1] = "";
 
 }
 
@@ -136,16 +127,5 @@ function inputKeyUp(e) {
 //*******************************************
 
 growButton.addEventListener("click", mainProgram);
-
-
-// clearButton.addEventListener("click", clearAll);
-
-function clearAll (clickEvent) {
-	inputTemp = document.getElementById("temp").value = "";
-	document.getElementById("cels").checked = false;
-	document.getElementById("fahr").checked = false;
-	document.getElementById("output").innerHTML = "";
-}
-
 
 
