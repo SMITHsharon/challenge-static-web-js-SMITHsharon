@@ -94,38 +94,44 @@ var growButton = document.getElementById("btnText");
 // (as long as the cursor is in one of the input fields) ... 
 //*******************************************
 
-enterHeight.addEventListener("keyup", inputKeyUp);
-enterChar.addEventListener("keyup", inputKeyUp);
+// THIS <ENTERKEY> EVENT HANDLER WORKS CORRECTLY
+// enterHeight.addEventListener("keyup", inputKeyUp);
+// enterChar.addEventListener("keyup", inputKeyUp);
 
-function inputKeyUp(e) {
-    e.which = e.which || e.keyCode;
-// console.log("in function inputKeyUp");
-    if (e.which === 13) {
-    	mainProgram();
-        // mainLaunchEnter();
-    } else {
-    	return false;
-    }
-}
-
-// NOT WORKING ???
-// enterKey.addEventListener("keyup", function() { // from Justin
-//     e.which = e.which || e.keyCode;			   // NOT TESTED ... BUT SHOULD WORK
-// console.log("in <enterKey> eventHandler");
+// function inputKeyUp(e) {
+//     e.which = e.which || e.keyCode;
 //     if (e.which === 13) {
-//     	buildTree();
-//         // mainLaunchEnter();
+//     	mainProgram();
 //     } else {
 //     	return false;
 //     }
-// });
+// }
+
+
+// THIS <ENTERKEY> EVENT HANDLER ALSO WORKS CORRECTLY
+enterHeight.addEventListener("keyup", function(e) { 
+    e.which = e.which || e.keyCode;			  
+    if (e.which === 13) {
+    	mainProgram();
+    } else {
+    	return false;
+    }
+});
+
+enterChar.addEventListener("keyup", function(e) { 
+    e.which = e.which || e.keyCode;			  
+    if (e.which === 13) {
+    	mainProgram();
+    } else {
+    	return false;
+    }
+});
 
 
 //*******************************************
 // ... or click a button that is labeled "Grow your tree" 
 // and the tree should be shown in the console. 
 //*******************************************
-
 growButton.addEventListener("click", mainProgram);
 
 
