@@ -2,22 +2,21 @@
 <html>
 <head>
 	<title>(20) JS Quiz :: Build a Tree</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
 	<div>
 	  <fieldset>
 	    <legend>Your Tree Specs</legend>
 
-	    <!-- The value for the height of the tree should be from user input in a <input type="text"> field in the DOM. -->
-	    <input type="text" id="treeHeight" class="promptText" size=16 value="Height of Tree ::  ">
+	    <!-- The value for the height of the tree should be from user input in a field in the DOM.  -->
+	    <input type="text" id="treeHeight" size=16 placeholder="Height of Tree ::  ">
 
 	    <!-- The character to use should be from user input in a <input type="text"> field in the DOM. -->
-	    <input type="text" id="treeChar" class="promptText" size=20 value="Character for Tree ::  ">
+	    <input type="text" id="treeChar" size=20 placeholder="Character for Tree ::  ">
 	    
 		<!-- ... or click a button that is labeled "Grow your tree" and the tree should be shown in the console. -->
-		<input type="submit" class="btnText" value="Grow Your Tree" onclick="buildTree()">
-
+		<input type="submit" id="btnText" value="Grow Your Tree">
+	  </fieldset>
  	</div>
 
 	<script type="text/javascript" src="main.js"></script>

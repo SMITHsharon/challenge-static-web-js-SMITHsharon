@@ -1,91 +1,109 @@
 //*******************************************
 // MAIN PROGRAM CONTROL
 //*******************************************
-function buildTree (clickEvent) {
-//*******************************************
-// It accepts a single object as an argument. The object should have two key/value pairs.
-//
-// A key that specifies the height of the pine tree.
-// The value for the height of the tree should be from user input in a <input type="text"> field in the DOM.
-// A key that specifies which character to use to build the pine tree.
-// The character to use should be from user input in a <input type="text"> field in the DOM.
-//*******************************************
+function mainProgram () {
 
-//*******************************************
-// Once the user enters in a number, and a character, the user can either then just 
-// press the enter key (as long as the cursor is in one of the input fields), ...
-//*******************************************
-
-//*******************************************
-// ... or click a button that is labeled "Grow your tree"  ... 
-//*******************************************
-
-//*******************************************
-// ... and the tree should be shown in the console. 
-//*******************************************
-
-//*******************************************
-// If either of the input fields does not have a value in it 
-// when the user presses the enter key, or presses the button, 
-// then display an alert stating that both fields must have a value.
-//*******************************************
+	var treeProperties = {
+		treeHeight: "",
+		treeCharacter: ""
 	}
 
+	var readyToBuild;
+	var treeString;
+	readyToBuild = readUserInput(treeProperties);
+	if (readyToBuild) {
+		treeString = buildTree(treeProperties);
+		console.log(treeString);
+	} else {
+		alert("Must specify both height and character to build the tree! <duh>");
+	}
+
+	clearFields(treeProperties); // reinitialize user interface
+}
+
 
 
 //*******************************************
-// define Event Listeners
+// SUPPORTING FUNCTIONS
 //*******************************************
-var enterKey = document.getElementsByClassName("tempForm");
-var converterButton = document.getElementById("converter");
-var clearButton = document.getElementById("clear");
+
+function readUserInput(properties) {
+
+	properties[0] = document.getElementById("treeHeight").value;
+	properties[1] = document.getElementById("treeChar").value;
+
+	if ((properties[0] !== "") && (properties[1] !== "")) {
+		return true; // readyToBuild
+	} else {
+		return false;
+	}
+}
+
+	
+function buildTree(properties) {
+	var outputHeight = properties[0];
+	var outputChar = properties[1];
+	var printSpaces; 
+	var printTreeChars;
+	var treeString = "";
+
+	for (var i=0; i<outputHeight; i++) {
+
+		printSpaces = outputHeight - (i+1); // calculate #spaces to output
+		printTreeChars = (2*i) + 1;			// calculate #characters to output
+											// for this <i> line
+		// build this <i> line <string>
+		for (var j=0; j<printSpaces; j++) {
+			treeString += " ";
+		}
+		for (var k=0; k<printTreeChars; k++) {
+			treeString += outputChar;
+		}
+
+		treeString += "\n";
+	}
+
+	return treeString;
+}
+
+
+// reiniatialize everything to start state
+function clearFields(properties) {
+
+	document.getElementById("treeHeight").value = "";
+	document.getElementById("treeChar").value = "";
+	document.getElementById("treeHeight").placeholder = "Height of Tree ::  ";
+	document.getElementById("treeChar").placeholder = "Character for Tree :: ";
+	properties[0] = "";
+	properties[1] = "";
+
+}
 
 
 //*******************************************
-// Once the user enters in a number, and a character, 
-// the user can either then just press the enter key 
-// (as long as the cursor is in one of the input fields) ... 
+// EVENT LISTENERS
+//*******************************************
+var enterHeight = document.getElementById("treeHeight");
+var enterChar = document.getElementById("treeChar");
+var growButton = document.getElementById("btnText");
+
+
+//*******************************************
+// event handler for <Enter> key
 //*******************************************
 
-function inputKeyUp(e) {
-    e.which = e.which || e.keyCode;
+enterChar.addEventListener("keyup", function(e) { 
+    e.which = e.which || e.keyCode;			  
     if (e.which === 13) {
-    	performConversion();
-        // mainLaunchEnter();
+    	mainProgram();
     } else {
     	return false;
     }
-}
-
-// enterKey.addEventListener("keyup", function() { // NOT TESTED ... BUT SHOULD WORK
-//     e.which = e.which || e.keyCode;
-//     if (e.which === 13) {
-//     	performConversion();
-//         // mainLaunchEnter();
-//     } else {
-//     	return false;
-//     }
-// });
-
+});
 
 //*******************************************
-// ... or click a button that is labeled "Grow your tree" 
-// and the tree should be shown in the console. 
+// event handler for <Grow your tree> button
 //*******************************************
-
-//  converterButton.addEventListener("click", function() {
-// 	performConversion();
-// });
-
-
-clearButton.addEventListener("click", clearAll);
-
-function clearAll (clickEvent) {
-	inputTemp = document.getElementById("temp").value = "";
-	document.getElementById("cels").checked = false;
-	document.getElementById("fahr").checked = false;
-	document.getElementById("output").innerHTML = "";
-}
-
+growButton.addEventListener("click", mainProgram);
 
 
