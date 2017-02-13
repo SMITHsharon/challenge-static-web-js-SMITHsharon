@@ -9,9 +9,11 @@ function mainProgram () {
 	}
 
 	var readyToBuild;
+	var treeString;
 	readyToBuild = readUserInput(treeProperties);
 	if (readyToBuild) {
-		buildTree(treeProperties);
+		treeString = buildTree(treeProperties);
+		console.log(treeString);
 	} else {
 		alert("Must specify both height and character to build the tree! <duh>");
 	}
@@ -43,7 +45,7 @@ function buildTree(properties) {
 	var outputChar = properties[1];
 	var printSpaces; 
 	var printTreeChars;
-	var thisString = "";
+	var treeString = "";
 
 	for (var i=0; i<outputHeight; i++) {
 
@@ -52,18 +54,16 @@ function buildTree(properties) {
 											// for this <i> line
 		// build this <i> line <string>
 		for (var j=0; j<printSpaces; j++) {
-			thisString += " ";
+			treeString += " ";
 		}
 		for (var k=0; k<printTreeChars; k++) {
-			thisString += outputChar;
+			treeString += outputChar;
 		}
 
-		// output this <i> line
-		console.log(thisString);
-
-		// clear the string for the next line
-		thisString = "";
+		treeString += "\n";
 	}
+
+	return treeString;
 }
 
 
@@ -89,34 +89,8 @@ var growButton = document.getElementById("btnText");
 
 
 //*******************************************
-// Once the user enters in a number, and a character, 
-// the user can either then just press the enter key 
-// (as long as the cursor is in one of the input fields) ... 
+// event handler for <Enter> key
 //*******************************************
-
-// THIS <ENTERKEY> EVENT HANDLER WORKS CORRECTLY
-// enterHeight.addEventListener("keyup", inputKeyUp);
-// enterChar.addEventListener("keyup", inputKeyUp);
-
-// function inputKeyUp(e) {
-//     e.which = e.which || e.keyCode;
-//     if (e.which === 13) {
-//     	mainProgram();
-//     } else {
-//     	return false;
-//     }
-// }
-
-
-// THIS <ENTERKEY> EVENT HANDLER ALSO WORKS CORRECTLY
-enterHeight.addEventListener("keyup", function(e) { 
-    e.which = e.which || e.keyCode;			  
-    if (e.which === 13) {
-    	mainProgram();
-    } else {
-    	return false;
-    }
-});
 
 enterChar.addEventListener("keyup", function(e) { 
     e.which = e.which || e.keyCode;			  
@@ -127,10 +101,8 @@ enterChar.addEventListener("keyup", function(e) {
     }
 });
 
-
 //*******************************************
-// ... or click a button that is labeled "Grow your tree" 
-// and the tree should be shown in the console. 
+// event handler for <Grow your tree> button
 //*******************************************
 growButton.addEventListener("click", mainProgram);
 
